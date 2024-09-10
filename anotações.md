@@ -57,8 +57,10 @@ Exemplo: const { select } = require('@inquirer/prompts')
 
 --
 
+# Assíncronas 
+
 Async e await: O await é utilizado para que uma aplicação espere para ser iniciada, caso contrário ela irá rodar tudo, o que não queremos. O async é colocado por ser uma dependência para o await funcionar. 
 
 --
 
-Anotações importantes do commit: A estrutura com While + Switch associando os values garantem a execução via terminal. 
+Anotações importantes do commit "adding menu and important foundations": A estrutura com While + Switch associando os values garantem a execução via terminal. 
