@@ -30,3 +30,23 @@ Number - Números (0.9328)
 --
 
 
+# Estruturas de repetição 
+
+- ## While: Enquanto(condição) for verdadeiro ou falso, o que for escrito dentro das {} será executado 
+
+Exemplo :
+
+const start = () => {
+    let count = 0 
+while (count <= 10) {
+    console.log(count)
+    count = count + 1 
+    return
+}
+}
+
+start()
+
+### Nota: Se o return não for colocado, o count será concatenado até se atingir o valor 10. Isso mostra a importância da atenção ao se colocar ou não return a depender do que quer que o código execute 
+
+
