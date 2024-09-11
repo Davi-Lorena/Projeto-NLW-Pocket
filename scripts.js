@@ -170,10 +170,10 @@ if(mensagem != "") {
 const start = async () => {
     await carregarMetas()
 
-await salvarMetas()
-
- while(true) {  
-mostrarMensagem()
+    
+    while(true) {  
+        mostrarMensagem()
+        await salvarMetas()
     const opcao = await select({
         message: "Menu >",
         choices: [
