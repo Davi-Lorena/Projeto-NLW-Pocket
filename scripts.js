@@ -1,5 +1,7 @@
 const { select, input, checkbox } = require('@inquirer/prompts')
 
+let mensagem = "Bem vindo ao app de metas!!!"
+
 let meta = { // exemplo/padrão a ser seguido
     value: 'Estudar 8H por dia',
     checked: false,
@@ -15,7 +17,7 @@ const meta = await input({message: "Digite a meta:"})
  Caso eu quisesse que o usuário permanecesse com a "tela" dos dígitos vazios, deveria chamar novamente a function na frente do return (return cadastrar meta()), criando assim um ciclo. 
  */
 if(meta.length == 0) {
-    console.log("Digite uma meta! Não queremos dígitos vazios nem aqui nem na sua rotina :) ")
+    mensagem = "Digite uma meta! Não queremos dígitos vazios nem aqui nem na sua rotina :) "
     return
 }
 
@@ -24,8 +26,9 @@ metas.push({
 }
 )
 
-}
+mensagem = "Meta cadastrada com sucesso"
 
+}
 
 const listarMetas = async () => {
     const respostas = await checkbox({
@@ -39,7 +42,7 @@ metas.forEach((m) => {
 })
 
 if(respostas.length == 0) { // validação no padrão 
-    console.log("Nenhuma meta selecionada...")
+   mensagem = "Nenhuma meta selecionada..."
     return
 }
 
@@ -53,7 +56,7 @@ meta.checked = true
 
 })
 
-console.log("Meta(s) marcada(s) como concluída(s)!!")
+mensagem = "Meta(s) marcada(s) como concluída(s)!!"
 
 }
 
@@ -63,7 +66,7 @@ const metasRealizadas = async () => {
     })
 
 if(realizadas.length == 0) {
-    console.log("Não existem metas realizadas :(")
+    mensagem = "Não existem metas realizadas :("
     return
 }
 
@@ -80,7 +83,7 @@ const metasAbertas = async () => {
     })
 
 if(abertas.length == 0) {
-    console.log("Não existem metas abertas! :)")
+    mensagem = "Não existem metas abertas! :)"
     return
 }
 
@@ -103,7 +106,7 @@ return { value: meta.value, checked: false }
     })
 
 if(itensADeletar.length == 0){
-    console.log("Nenhum item para deletar!")
+    mensagem = "Nenhum item para deletar!"
     return
 }
 
@@ -113,13 +116,25 @@ itensADeletar.forEach((item) => {
     })
 })
 
+mensagem = "Meta(s) deletada(s) com sucesso!"
+
+}
+
+const mostrarMensagem = () => {
+    console.clear();
+
+if(mensagem != "") {
+    console.log(mensagem)
+    console.log("")
+    mensagem = ""
+}
 
 }
 
 
 const start = async () => {
  while(true) {  
-
+mostrarMensagem()
     const opcao = await select({
         message: "Menu >",
         choices: [
@@ -153,7 +168,6 @@ const start = async () => {
     switch(opcao) {
 case "cadastrar": 
 await cadastrarMeta()
-console.log(metas)
 break
 case "listar":
     await listarMetas()
