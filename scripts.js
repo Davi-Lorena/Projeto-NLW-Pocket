@@ -45,7 +45,7 @@ if(respostas.length == 0) { // validação no padrão
 
 respostas.forEach((resposta) => {
 const meta = metas.find((m) => {
-    return m.value = resposta
+    return m.value == resposta
 })
 
 
@@ -63,17 +63,33 @@ const metasRealizadas = async () => {
     })
 
 if(realizadas.length == 0) {
-    console.log("Não existem mets realizadas :(")
+    console.log("Não existem metas realizadas :(")
     return
 }
 
 await select ({
-    message: "Metas realizadas",
+    message: "Metas realizadas " + realizadas.length,
     choices: [...realizadas]
 })
 
 }
 
+const metasAbertas = async () => {
+    const abertas = metas.filter((meta) => {
+        return !meta.checked // !Somente relembrando que a exclamação significa inversão de valor para falso em !booleanos! 
+    })
+
+if(abertas.length == 0) {
+    console.log("Não existem metas abertas! :)")
+    return
+}
+
+await select({
+    message: "Metas abertas " + abertas.length, // a concatenação aqui exibe o número de metas abertas  
+    choices: [...abertas]
+})
+
+}
 
 const start = async () => {
  while(true) {  
@@ -93,6 +109,10 @@ const start = async () => {
                 name: "Metas realizadas",
                 value: "realizadas"
             },
+            {
+                name: "Metas abertas",
+                value: "abertas"
+            },
             { 
                 name: "Sair",
                 value: "sair"
@@ -111,6 +131,9 @@ case "listar":
     case "realizadas":
         await metasRealizadas()
         break
+        case "abertas":
+            await metasAbertas()
+            break
     case "sair": 
     console.log("Até a próxima!")
     return
